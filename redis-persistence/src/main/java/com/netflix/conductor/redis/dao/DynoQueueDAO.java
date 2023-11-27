@@ -100,7 +100,10 @@ public class DynoQueueDAO implements QueueDAO {
     @Override
     public List<com.netflix.conductor.core.events.queue.Message> pollMessages(
             String queueName, int count, int timeout) {
+        System.out.println("Polling :"+ queueName);
         List<Message> msgs = queues.get(queueName).pop(count, timeout, TimeUnit.MILLISECONDS);
+        System.out.println(queueName+" pollMsg size:"+msgs.size());
+
         return msgs.stream()
                 .map(
                         msg ->
